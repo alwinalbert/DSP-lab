@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-f = 1
+f = float(input("enter the frtquency:"))
 t= np.linspace(0,10,500)
 n=np.linspace(0,10,100)
 cosine = np.cos(2*np.pi*f*t)
