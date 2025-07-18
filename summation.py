@@ -13,6 +13,7 @@ plt.title("summation")
 plt.xlabel("time")
 plt.ylabel("amplitude")
 plt.stem(n,result)
+plt.grid(True)
 plt.show()    
 
 

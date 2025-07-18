@@ -11,8 +11,9 @@ def x(n):
 
 n = np.arange(-10,11,1)
 
-plt.title("x(3n+2)")
+plt.title("x(-3n+2)")
 plt.xlabel("time")
 plt.ylabel("amplitude")
 plt.stem(n,x(-3*n+2))
+plt.grid(True)
 plt.show()

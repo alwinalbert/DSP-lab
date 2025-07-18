@@ -13,6 +13,7 @@ plt.title("equation question")
 plt.xlabel("time")
 plt.ylabel("amplitude")
 plt.stem(n,result)
+plt.grid(True)
 plt.show()
 
 
