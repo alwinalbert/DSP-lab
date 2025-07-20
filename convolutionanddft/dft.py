@@ -13,5 +13,5 @@ def dft(x):
         y[k] = s                                
     return y
 
-x = [1, 2, 3, 4]
+x = eval(input('enter elements:'))
 print("DFT result:",dft(x))

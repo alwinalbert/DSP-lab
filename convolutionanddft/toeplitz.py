@@ -17,8 +17,8 @@ def convolution(x,h):
     y = toeplitz_matrix @ x            
     return y
 
-x = [1,2,3,4]
-h = [1,0,1]
+x = eval(input('enter elements:'))
+h = eval(input('enter elements:'))
 print('convolution result:',convolution(x,h))
 
             

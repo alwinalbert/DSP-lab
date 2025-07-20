@@ -9,6 +9,6 @@ def dft_matrix(x):
     X = W @ x                             # Matrix multiply (DFT)
     return X
 
-x = [1, 2, 3, 4]
+x = eval(input('enter elements:'))
 result = dft_matrix(x)
 print("DFT (matrix form):", result)
