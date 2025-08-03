@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 def dft(x):
     x = np.asarray(x, dtype=complex)            
@@ -15,3 +16,12 @@ def dft(x):
 
 x = eval(input('enter elements:'))
 print("DFT result:",dft(x))
+z = dft(x)
+plt.subplot(1,2,1)
+plt.title('magnitude')
+plt.stem(np.abs(z))
+plt.subplot(1,2,2)
+plt.title('phase')
+plt.stem(np.angle(z))
+plt.tight_layout()
+plt.show()
