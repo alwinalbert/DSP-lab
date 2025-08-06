@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+# dft
 def dft(x):
     x = np.asarray(x, dtype=complex)            
     N = len(x)                              
