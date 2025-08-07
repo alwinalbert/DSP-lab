@@ -10,9 +10,9 @@ def convolution(x,h):
 
     for n in range(len_y):
         summation = 0
-        for k in range(len_h):
-            if 0 <= n-k < len_x:
-                summation += h[k] * x[n-k]
+        for k in range(len_x):
+            if 0 <= n-k < len_h:
+                summation += h[n-k] * x[k]
         y[n] = summation
 
     return y
