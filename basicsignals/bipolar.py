@@ -16,4 +16,3 @@ a[1].stem(n,bipolar_n)
 a[1].set_xlabel("time")
 a[1].set_ylabel("amplitude")
 plt.show()
-#fsdfsdf
