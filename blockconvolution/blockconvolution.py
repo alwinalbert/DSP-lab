@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 signal = input('enter the signal: ')
 x = np.array([float(num) for num in signal.strip().split()])
@@ -30,4 +31,8 @@ for b in range(blocks):
 y = np.concatenate(output)
 y = y[:len(x) + M - 1]
 print('The output signal is: ', y)
+plt.stem(y)
+plt.xlabel('n')
+plt.ylabel('amplitude')
+plt.show()
 
