@@ -18,6 +18,6 @@ def convolution(x,h):
 
 x = eval(input('enter elements:'))
 h = eval(input('enter elements:'))
-print('convolution result:',convolution(x,h))
+print('convolution result by toeplitz method:',convolution(x,h))
 
             
