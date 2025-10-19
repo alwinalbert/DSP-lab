@@ -3,16 +3,16 @@ import matplotlib.pyplot as plt
 def cir_conv_using_matrix(x,h):
     N=len(x)
     H = np.zeros((N,N))
-    x_padded=np.zeros(N)
-    h_padded = np.zeros(N)
-    x_padded[:min(len(x),N)] = x[:min(len(x),N)]
-    h_padded[:min(len(h),N)] = h[:min(len(h),N)]
+    #x_padded=np.zeros(N)
+    #h_padded = np.zeros(N)
+    #x_padded[:min(len(x),N)] = x[:min(len(x),N)]
+    #h_padded[:min(len(h),N)] = h[:min(len(h),N)]
 
     for n in range(N):
         for k in range(N):
-            H[n,k] = h_padded[(n-k)%N]
+            H[n,k] = h[(n-k)%N]
 
-    y_circ = np.dot(H,x_padded)
+    y_circ = np.dot(H,x)
     return y_circ
 
 
