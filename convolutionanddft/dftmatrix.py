@@ -6,7 +6,7 @@ def dft_matrix(x):
     n = np.arange(N)                      # Row indices
     k = n.reshape((N, 1))                 # Column indices as a column vector
     W = np.exp(-2j * np.pi * k * n / N)   # Construct the DFT matrix
-    X = W @ x                             # Matrix multiply (DFT)
+    X = np.dot(W,x)                            # Matrix multiply (DFT)
     return X
 
 x = eval(input('enter elements:'))
