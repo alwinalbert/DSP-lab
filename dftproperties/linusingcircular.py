@@ -25,7 +25,7 @@ def linear_convolution_via_circular_convolution(x,h):
     Y = X * H
     y = idft(Y)
     
-    return y
+    return np.real(y)
 
 x = np.array(eval(input("Enter a list of numbers for x: ")), dtype=complex)
 h = np.array(eval(input("Enter a list of numbers for h: ")), dtype=complex)
