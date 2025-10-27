@@ -1,4 +1,4 @@
-""" import numpy as np
+"""import numpy as np
 import matplotlib.pyplot as plt
 def dft(x):
     N = len(x)
@@ -29,8 +29,8 @@ plt.subplot(2,2,2)
 plt.title('magnitude of rhs')
 plt.stem(np.abs(rhs))
 plt.tight_layout()
-plt.show()
-"""
+plt.show()"""
+
 """ import numpy as np
 import matplotlib.pyplot as plt
 def dft(x):
@@ -96,7 +96,7 @@ plt.bar([0],rhs)
 plt.tight_layout()
 plt.show() """
 
-""" import numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 def dft(x):
     N = len(x)
@@ -109,14 +109,14 @@ def dft(x):
     return np.array(X)
 def circular_convolution(x,h):
     N = len(x)
-    z = np.zeros(N)
+    z  = [0]*N
     for n in range(N):
-        for m in range(N):
-            z[n]+=x[m]*h[(n-m) % N]
-    return z
+        for k in range(N):
+            z[n]+=x[k]*h[(n-k) % N]
+    return np.array(z)
 
-x = np.array(eval(input("enter the elements x: ")),dtype=complex)
-h = np.array(eval(input("enter the elements h: ")),dtype=complex)
+x = np.array(eval(input("enter the elements x: ")))
+h = np.array(eval(input("enter the elements h: ")))
 N = len(x)
 lhs = dft(x*h)
 rhs = (1/N)*circular_convolution(dft(x),dft(h))
@@ -129,62 +129,76 @@ plt.subplot(2,2,2)
 plt.title('magnitude of rhs')
 plt.stem(np.abs(rhs))
 plt.tight_layout()
-plt.show() """
+plt.show()
 
 """import numpy as np
 import matplotlib.pyplot as plt
 
-x = np.array([3,-1,0,1,3,2,0,1,2,1])
-h = np.array([1,1,1])
-L =3
-M = len(h)
-N =L+M-1
-x_padded = np.pad(x,(M-1,0))
-h_padded = np.pad(h,(0,N-M))
-blocks = [x_padded[i:i+N]for i in range(0,x_padded.size-N+1,L)]
-if x_padded.size % L != (M-1)%L:
-    last_block_start = len(blocks)*L
-if last_block_start<x_padded.size:
-    last_block = x_padded[last_block_start:]
-    last_block = np.pad(last_block,(0,N - len(last_block)))
-    blocks.append(last_block)
+def dft(x):
+    N =len(x)
+    X = [0]*N
+    for k in range(N):
+        for n in range(N):
+            X[k] += x[n]*np.exp(-2j*np.pi*k*n/N)
+    return np.array(X)
 
-y = np.zeros(len(x)+M-1)
-cursor = 0
-for b, block in enumerate(blocks):
-    y_blk = np.fft.ifft(np.fft.fft(block)*np.fft.fft(h_padded)).real
-    y_valid = y_blk[M-1:]
-    end_idx = min(cursor+len(y_valid),len(y))
-    y[cursor:end_idx] = y_valid[:end_idx-cursor]
-    cursor += L
+def idft(X):
+    N = len(X)
+    x = [0]*N
+    for n in range(N):
+        for k in range (N):
+            x[n] += (1/N)*X[k]*np.exp(2j*np.pi*k*n/N)
+    return np.array(x)
 
-print('The output signal is: ', y)
-plt.stem(y) 
-plt.xlabel('n')
-plt.ylabel('amplitude')
+x = np.array(eval(input("enter the elements: ")),dtype=complex)
+X = dft(x)
+x_reconstructed = idft(X)
+print("Reconstructed x[n]: ", x_reconstructed)
+plt.subplot(3,1,1)
+plt.title('Original x[n]')
+plt.stem(np.abs(x))
+plt.subplot(3,1,2)
+plt.title('DFT Magnitude')
+plt.stem(np.abs(X)) 
+plt.subplot(3,1,3)
+plt.title('Reconstructed x[n]')
+plt.stem(np.abs(x_reconstructed))
+plt.tight_layout()
 plt.show()"""
 
-import numpy as np
+"""import numpy as np
 import matplotlib.pyplot as plt
-x =np.array([-3,-1,0,1,3,2,0,1,2,1])
-h =np.array([1,1,1])
-L=4
-M = len(h)
-N=L+M-1
-h_padded =np.pad(h,(0,N-M)) 
-blocks =[x[i:i+L]for i in range(0,len(x),L)]
-y =np.zeros(len(x)+M-1)
-for b,block in enumerate(blocks):
-    block_padded = np.pad(block,(0,N-len(block)))
-    y_blk = np.fft.ifft(np.fft.fft(block_padded)*np.fft.fft(h_padded)).real
-    start_pos = b * L
-    end_pos = min(start_pos + N, len(y))
-    y[start_pos:end_pos] += y_blk[:end_pos - start_pos]
 
-print('The output signal is: ', y)
-plt.stem(y)
-plt.xlabel('n')
-plt.ylabel('amplitude')
+def dit_fft(x):
+    N =len(x)
+    if N ==1:
+        return x
+    if np.log2(N)%1 != 0:
+        print("enter the length of x as power of 2 completed")
+        return
+    X_even = x[0::2]
+    X_odd = x[1::2]
+    X_e = dit_fft(X_even)
+    X_o = dit_fft(X_odd)
+    twiddle = np.exp(-2j*np.pi*np.arange(N)/N)
+    return np.concatenate([
+        X_e + twiddle[:N//2]* X_o,
+        X_e - twiddle[:N//2]*X_o
+        ])
+
+x = np.array(eval(input("enter x[n] should be length of power of 2:")))
+x_fft = dit_fft(x)
+x_fft_numpy = np.fft.fft(x)
+print("FFT using numpy is: ", x_fft_numpy)
+plt.subplot(2,1,1)
+plt.stem(np.abs(x_fft_numpy))
+plt.title("FFT Output using Numpy")
+plt.subplot(2,1,2)
+plt.stem(np.abs(x_fft))
+plt.title("FFT Output using DIT-FFT Algorithm")
+plt.xlabel("k")
+plt.tight_layout()
 plt.show()
+"""
 
 

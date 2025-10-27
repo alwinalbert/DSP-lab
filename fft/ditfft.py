@@ -15,7 +15,7 @@ def dit_fft(x):
         X_even - twiddle[:N//2]*X_odd
     ])
 
-x = np.array(eval(input("enter x[n] should be lenght of power of 2:")))
+x = np.array(eval(input("enter x[n] should be length of power of 2:")))
 x_fft = dit_fft(x)
 x_straight = np.fft.fft(x)
 print("FFT using numpy is: ", x_straight)

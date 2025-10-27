@@ -50,6 +50,6 @@ L = int(input("Enter the block length L: "))
 z = np.convolve(x,h)
 
 result = overlap_save(x, h, L)
-print(f"Overlap-save result: {result}")
-print(f"Direct convolution result: {z}")
+print("Overlap-save result: ", result)
+print("Direct convolution result: ", z)
 
