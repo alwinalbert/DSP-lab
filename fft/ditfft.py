@@ -4,7 +4,7 @@ def dit_fft(x):
     N =len(x)
     if N==1:
         return x
-    if N%2 !=0:
+    if np.log2(N)%1 !=0:
         print("length must be the size of square of 2")
         return
     X_even = dit_fft(x[0::2])

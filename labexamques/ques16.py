@@ -35,6 +35,7 @@ def overlap_save(x,h,L):
         result_segments.append(valid_samples)
     y = np.concatenate(result_segments)
     return y[:output_length]
+#x = np.ones(100)
 x = np.array(eval(input("Enter the elements x: ")))
 h = np.array(eval(input("Enter the elements h: ")))
 L = int(input("Enter the block length L: "))
